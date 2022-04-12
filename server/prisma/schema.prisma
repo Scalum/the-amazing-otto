@@ -8,19 +8,54 @@ generator client {
 }
 
 model User {
-  createdAt DateTime @default(now())
+  createdAt DateTime   @default(now())
   firstName String?
-  id        String   @id @default(cuid())
+  id        String     @id @default(cuid())
   lastName  String?
+  manifests Manifest[]
   password  String
   roles     String[]
-  updatedAt DateTime @updatedAt
-  username  String   @unique
+  tickets   Ticket[]
+  updatedAt DateTime   @updatedAt
+  username  String     @unique
 }
 
 model Vehicle {
-  chasisNumber String?
-  createdAt    DateTime @default(now())
-  id           String   @id @default(cuid())
-  updatedAt    DateTime @updatedAt
+  chasisNumber       String     @unique
+  createdAt          DateTime   @default(now())
+  id                 String     @id @default(cuid())
+  manifests          Manifest[]
+  registrationNumber String     @unique
+  updatedAt          DateTime   @updatedAt
+}
+
+model Route {
+  createdAt    DateTime   @default(now())
+  fromLocation String?
+  id           String     @id @default(cuid())
+  manifests    Manifest[]
+  name         String?
+  toLocation   String?
+  updatedAt    DateTime   @updatedAt
+}
+
+model Manifest {
+  createdAt   DateTime @default(now())
+  driverId    User     @relation(fields: [driverIdId], references: [id])
+  driverIdId  String
+  id          String   @id @default(cuid())
+  routeId     Route    @relation(fields: [routeIdId], references: [id])
+  routeIdId   String
+  ticket      Ticket[]
+  updatedAt   DateTime @updatedAt
+  vehicleId   Vehicle  @relation(fields: [vehicleIdId], references: [id])
+  vehicleIdId String
+}
+
+model Ticket {
+  createdAt  DateTime   @default(now())
+  id         String     @id @default(cuid())
+  manifestId Manifest[]
+  updatedAt  DateTime   @updatedAt
+  userId     User[]
 }

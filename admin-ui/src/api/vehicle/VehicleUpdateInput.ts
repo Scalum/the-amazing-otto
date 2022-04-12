@@ -1,3 +1,7 @@
+import { ManifestUpdateManyWithoutVehiclesInput } from "./ManifestUpdateManyWithoutVehiclesInput";
+
 export type VehicleUpdateInput = {
-  chasisNumber?: string | null;
+  chasisNumber?: string;
+  manifests?: ManifestUpdateManyWithoutVehiclesInput;
+  registrationNumber?: string;
 };

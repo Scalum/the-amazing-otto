@@ -11,22 +11,22 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
-import { Type } from "class-transformer";
-import { IsOptional } from "class-validator";
 import { StringFilter } from "../../util/StringFilter";
+import { Type } from "class-transformer";
+import { IsOptional, ValidateNested } from "class-validator";
+import { ManifestListRelationFilter } from "../../manifest/base/ManifestListRelationFilter";
 @InputType()
 class VehicleWhereInput {
   @ApiProperty({
     required: false,
-    type: StringNullableFilter,
+    type: StringFilter,
   })
-  @Type(() => StringNullableFilter)
+  @Type(() => StringFilter)
   @IsOptional()
-  @Field(() => StringNullableFilter, {
+  @Field(() => StringFilter, {
     nullable: true,
   })
-  chasisNumber?: StringNullableFilter;
+  chasisNumber?: StringFilter;
 
   @ApiProperty({
     required: false,
@@ -38,5 +38,28 @@ class VehicleWhereInput {
     nullable: true,
   })
   id?: StringFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => ManifestListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => ManifestListRelationFilter)
+  @IsOptional()
+  @Field(() => ManifestListRelationFilter, {
+    nullable: true,
+  })
+  manifests?: ManifestListRelationFilter;
+
+  @ApiProperty({
+    required: false,
+    type: StringFilter,
+  })
+  @Type(() => StringFilter)
+  @IsOptional()
+  @Field(() => StringFilter, {
+    nullable: true,
+  })
+  registrationNumber?: StringFilter;
 }
 export { VehicleWhereInput };

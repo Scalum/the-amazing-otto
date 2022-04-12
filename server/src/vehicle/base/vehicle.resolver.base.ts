@@ -25,6 +25,8 @@ import { DeleteVehicleArgs } from "./DeleteVehicleArgs";
 import { VehicleFindManyArgs } from "./VehicleFindManyArgs";
 import { VehicleFindUniqueArgs } from "./VehicleFindUniqueArgs";
 import { Vehicle } from "./Vehicle";
+import { ManifestFindManyArgs } from "../../manifest/base/ManifestFindManyArgs";
+import { Manifest } from "../../manifest/base/Manifest";
 import { VehicleService } from "../vehicle.service";
 
 @graphql.Resolver(() => Vehicle)
@@ -202,5 +204,31 @@ export class VehicleResolverBase {
       }
       throw error;
     }
+  }
+
+  @graphql.ResolveField(() => [Manifest])
+  @nestAccessControl.UseRoles({
+    resource: "Vehicle",
+    action: "read",
+    possession: "any",
+  })
+  async manifests(
+    @graphql.Parent() parent: Vehicle,
+    @graphql.Args() args: ManifestFindManyArgs,
+    @gqlUserRoles.UserRoles() userRoles: string[]
+  ): Promise<Manifest[]> {
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "read",
+      possession: "any",
+      resource: "Manifest",
+    });
+    const results = await this.service.findManifests(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results.map((result) => permission.filter(result));
   }
 }

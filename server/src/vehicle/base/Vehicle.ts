@@ -11,20 +11,18 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsOptional, IsDate } from "class-validator";
+import { IsString, IsDate, ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
+import { Manifest } from "../../manifest/base/Manifest";
 @ObjectType()
 class Vehicle {
   @ApiProperty({
-    required: false,
+    required: true,
     type: String,
   })
   @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  chasisNumber!: string | null;
+  @Field(() => String)
+  chasisNumber!: string;
 
   @ApiProperty({
     required: true,
@@ -41,6 +39,23 @@ class Vehicle {
   @IsString()
   @Field(() => String)
   id!: string;
+
+  @ApiProperty({
+    required: false,
+    type: () => [Manifest],
+  })
+  @ValidateNested()
+  @Type(() => Manifest)
+  @IsOptional()
+  manifests?: Array<Manifest>;
+
+  @ApiProperty({
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  registrationNumber!: string;
 
   @ApiProperty({
     required: true,

@@ -10,7 +10,7 @@ https://docs.amplication.com/docs/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "nestjs-prisma";
-import { Prisma, Vehicle } from "@prisma/client";
+import { Prisma, Vehicle, Manifest } from "@prisma/client";
 
 export class VehicleServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
@@ -45,5 +45,16 @@ export class VehicleServiceBase {
     args: Prisma.SelectSubset<T, Prisma.VehicleDeleteArgs>
   ): Promise<Vehicle> {
     return this.prisma.vehicle.delete(args);
+  }
+
+  async findManifests(
+    parentId: string,
+    args: Prisma.ManifestFindManyArgs
+  ): Promise<Manifest[]> {
+    return this.prisma.vehicle
+      .findUnique({
+        where: { id: parentId },
+      })
+      .manifests(args);
   }
 }

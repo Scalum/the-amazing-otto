@@ -1,7 +1,9 @@
-import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
+import { ManifestListRelationFilter } from "../manifest/ManifestListRelationFilter";
 
 export type VehicleWhereInput = {
-  chasisNumber?: StringNullableFilter;
+  chasisNumber?: StringFilter;
   id?: StringFilter;
+  manifests?: ManifestListRelationFilter;
+  registrationNumber?: StringFilter;
 };

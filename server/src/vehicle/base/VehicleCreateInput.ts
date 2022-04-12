@@ -11,18 +11,37 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsOptional } from "class-validator";
+import { IsString, ValidateNested, IsOptional } from "class-validator";
+import { ManifestCreateNestedManyWithoutVehiclesInput } from "./ManifestCreateNestedManyWithoutVehiclesInput";
+import { Type } from "class-transformer";
 @InputType()
 class VehicleCreateInput {
   @ApiProperty({
-    required: false,
+    required: true,
     type: String,
   })
   @IsString()
+  @Field(() => String)
+  chasisNumber!: string;
+
+  @ApiProperty({
+    required: false,
+    type: () => ManifestCreateNestedManyWithoutVehiclesInput,
+  })
+  @ValidateNested()
+  @Type(() => ManifestCreateNestedManyWithoutVehiclesInput)
   @IsOptional()
-  @Field(() => String, {
+  @Field(() => ManifestCreateNestedManyWithoutVehiclesInput, {
     nullable: true,
   })
-  chasisNumber?: string | null;
+  manifests?: ManifestCreateNestedManyWithoutVehiclesInput;
+
+  @ApiProperty({
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  registrationNumber!: string;
 }
 export { VehicleCreateInput };

@@ -15,6 +15,7 @@ export const VehicleList = (props: ListProps): React.ReactElement => {
         <TextField label="Chasis Number" source="chasisNumber" />
         <DateField source="createdAt" label="Created At" />
         <TextField label="ID" source="id" />
+        <TextField label="Registration Number" source="registrationNumber" />
         <DateField source="updatedAt" label="Updated At" />
       </Datagrid>
     </List>

@@ -27,6 +27,9 @@ import { VehicleWhereUniqueInput } from "./VehicleWhereUniqueInput";
 import { VehicleFindManyArgs } from "./VehicleFindManyArgs";
 import { VehicleUpdateInput } from "./VehicleUpdateInput";
 import { Vehicle } from "./Vehicle";
+import { ManifestFindManyArgs } from "../../manifest/base/ManifestFindManyArgs";
+import { Manifest } from "../../manifest/base/Manifest";
+import { ManifestWhereUniqueInput } from "../../manifest/base/ManifestWhereUniqueInput";
 @swagger.ApiBearerAuth()
 export class VehicleControllerBase {
   constructor(
@@ -75,6 +78,7 @@ export class VehicleControllerBase {
         chasisNumber: true,
         createdAt: true,
         id: true,
+        registrationNumber: true,
         updatedAt: true,
       },
     });
@@ -112,6 +116,7 @@ export class VehicleControllerBase {
         chasisNumber: true,
         createdAt: true,
         id: true,
+        registrationNumber: true,
         updatedAt: true,
       },
     });
@@ -148,6 +153,7 @@ export class VehicleControllerBase {
         chasisNumber: true,
         createdAt: true,
         id: true,
+        registrationNumber: true,
         updatedAt: true,
       },
     });
@@ -205,6 +211,7 @@ export class VehicleControllerBase {
           chasisNumber: true,
           createdAt: true,
           id: true,
+          registrationNumber: true,
           updatedAt: true,
         },
       });
@@ -242,6 +249,7 @@ export class VehicleControllerBase {
           chasisNumber: true,
           createdAt: true,
           id: true,
+          registrationNumber: true,
           updatedAt: true,
         },
       });
@@ -253,5 +261,200 @@ export class VehicleControllerBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
+  @common.UseGuards(
+    defaultAuthGuard.DefaultAuthGuard,
+    nestAccessControl.ACGuard
+  )
+  @common.Get("/:id/manifests")
+  @nestAccessControl.UseRoles({
+    resource: "Vehicle",
+    action: "read",
+    possession: "any",
+  })
+  @ApiNestedQuery(ManifestFindManyArgs)
+  async findManyManifests(
+    @common.Req() request: Request,
+    @common.Param() params: VehicleWhereUniqueInput,
+    @nestAccessControl.UserRoles() userRoles: string[]
+  ): Promise<Manifest[]> {
+    const query = plainToClass(ManifestFindManyArgs, request.query);
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "read",
+      possession: "any",
+      resource: "Manifest",
+    });
+    const results = await this.service.findManifests(params.id, {
+      ...query,
+      select: {
+        createdAt: true,
+
+        driverId: {
+          select: {
+            id: true,
+          },
+        },
+
+        id: true,
+
+        routeId: {
+          select: {
+            id: true,
+          },
+        },
+
+        updatedAt: true,
+
+        vehicleId: {
+          select: {
+            id: true,
+          },
+        },
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results.map((result) => permission.filter(result));
+  }
+
+  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
+  @common.UseGuards(
+    defaultAuthGuard.DefaultAuthGuard,
+    nestAccessControl.ACGuard
+  )
+  @common.Post("/:id/manifests")
+  @nestAccessControl.UseRoles({
+    resource: "Vehicle",
+    action: "update",
+    possession: "any",
+  })
+  async createManifests(
+    @common.Param() params: VehicleWhereUniqueInput,
+    @common.Body() body: VehicleWhereUniqueInput[],
+    @nestAccessControl.UserRoles() userRoles: string[]
+  ): Promise<void> {
+    const data = {
+      manifests: {
+        connect: body,
+      },
+    };
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "update",
+      possession: "any",
+      resource: "Vehicle",
+    });
+    const invalidAttributes = abacUtil.getInvalidAttributes(permission, data);
+    if (invalidAttributes.length) {
+      const roles = userRoles
+        .map((role: string) => JSON.stringify(role))
+        .join(",");
+      throw new common.ForbiddenException(
+        `Updating the relationship: ${
+          invalidAttributes[0]
+        } of ${"Vehicle"} is forbidden for roles: ${roles}`
+      );
+    }
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
+  @common.UseGuards(
+    defaultAuthGuard.DefaultAuthGuard,
+    nestAccessControl.ACGuard
+  )
+  @common.Patch("/:id/manifests")
+  @nestAccessControl.UseRoles({
+    resource: "Vehicle",
+    action: "update",
+    possession: "any",
+  })
+  async updateManifests(
+    @common.Param() params: VehicleWhereUniqueInput,
+    @common.Body() body: ManifestWhereUniqueInput[],
+    @nestAccessControl.UserRoles() userRoles: string[]
+  ): Promise<void> {
+    const data = {
+      manifests: {
+        set: body,
+      },
+    };
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "update",
+      possession: "any",
+      resource: "Vehicle",
+    });
+    const invalidAttributes = abacUtil.getInvalidAttributes(permission, data);
+    if (invalidAttributes.length) {
+      const roles = userRoles
+        .map((role: string) => JSON.stringify(role))
+        .join(",");
+      throw new common.ForbiddenException(
+        `Updating the relationship: ${
+          invalidAttributes[0]
+        } of ${"Vehicle"} is forbidden for roles: ${roles}`
+      );
+    }
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.UseInterceptors(nestMorgan.MorganInterceptor("combined"))
+  @common.UseGuards(
+    defaultAuthGuard.DefaultAuthGuard,
+    nestAccessControl.ACGuard
+  )
+  @common.Delete("/:id/manifests")
+  @nestAccessControl.UseRoles({
+    resource: "Vehicle",
+    action: "update",
+    possession: "any",
+  })
+  async deleteManifests(
+    @common.Param() params: VehicleWhereUniqueInput,
+    @common.Body() body: VehicleWhereUniqueInput[],
+    @nestAccessControl.UserRoles() userRoles: string[]
+  ): Promise<void> {
+    const data = {
+      manifests: {
+        disconnect: body,
+      },
+    };
+    const permission = this.rolesBuilder.permission({
+      role: userRoles,
+      action: "update",
+      possession: "any",
+      resource: "Vehicle",
+    });
+    const invalidAttributes = abacUtil.getInvalidAttributes(permission, data);
+    if (invalidAttributes.length) {
+      const roles = userRoles
+        .map((role: string) => JSON.stringify(role))
+        .join(",");
+      throw new common.ForbiddenException(
+        `Updating the relationship: ${
+          invalidAttributes[0]
+        } of ${"Vehicle"} is forbidden for roles: ${roles}`
+      );
+    }
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
   }
 }

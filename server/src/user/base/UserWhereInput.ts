@@ -13,8 +13,10 @@ import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { Type } from "class-transformer";
-import { IsOptional } from "class-validator";
+import { IsOptional, ValidateNested } from "class-validator";
 import { StringFilter } from "../../util/StringFilter";
+import { ManifestListRelationFilter } from "../../manifest/base/ManifestListRelationFilter";
+import { TicketListRelationFilter } from "../../ticket/base/TicketListRelationFilter";
 @InputType()
 class UserWhereInput {
   @ApiProperty({
@@ -49,6 +51,30 @@ class UserWhereInput {
     nullable: true,
   })
   lastName?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => ManifestListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => ManifestListRelationFilter)
+  @IsOptional()
+  @Field(() => ManifestListRelationFilter, {
+    nullable: true,
+  })
+  manifests?: ManifestListRelationFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => TicketListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => TicketListRelationFilter)
+  @IsOptional()
+  @Field(() => TicketListRelationFilter, {
+    nullable: true,
+  })
+  tickets?: TicketListRelationFilter;
 
   @ApiProperty({
     required: false,
