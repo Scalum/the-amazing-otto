@@ -11,7 +11,10 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsOptional } from "class-validator";
+import { IsString, IsOptional, ValidateNested } from "class-validator";
+import { ManifestUpdateManyWithoutUsersInput } from "./ManifestUpdateManyWithoutUsersInput";
+import { Type } from "class-transformer";
+import { TicketUpdateManyWithoutUsersInput } from "./TicketUpdateManyWithoutUsersInput";
 @InputType()
 class UserUpdateInput {
   @ApiProperty({
@@ -38,6 +41,18 @@ class UserUpdateInput {
 
   @ApiProperty({
     required: false,
+    type: () => ManifestUpdateManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => ManifestUpdateManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => ManifestUpdateManyWithoutUsersInput, {
+    nullable: true,
+  })
+  manifests?: ManifestUpdateManyWithoutUsersInput;
+
+  @ApiProperty({
+    required: false,
     type: String,
   })
   @IsString()
@@ -59,6 +74,18 @@ class UserUpdateInput {
     nullable: true,
   })
   roles?: Array<string>;
+
+  @ApiProperty({
+    required: false,
+    type: () => TicketUpdateManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => TicketUpdateManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => TicketUpdateManyWithoutUsersInput, {
+    nullable: true,
+  })
+  tickets?: TicketUpdateManyWithoutUsersInput;
 
   @ApiProperty({
     required: false,

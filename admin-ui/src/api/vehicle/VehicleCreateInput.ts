@@ -1,3 +1,7 @@
+import { ManifestCreateNestedManyWithoutVehiclesInput } from "./ManifestCreateNestedManyWithoutVehiclesInput";
+
 export type VehicleCreateInput = {
-  chasisNumber?: string | null;
+  chasisNumber: string;
+  manifests?: ManifestCreateNestedManyWithoutVehiclesInput;
+  registrationNumber: string;
 };

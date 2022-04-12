@@ -1,6 +1,9 @@
 import { Module } from "@nestjs/common";
 import { UserModule } from "./user/user.module";
 import { VehicleModule } from "./vehicle/vehicle.module";
+import { RouteModule } from "./route/route.module";
+import { ManifestModule } from "./manifest/manifest.module";
+import { TicketModule } from "./ticket/ticket.module";
 import { ACLModule } from "./auth/acl.module";
 import { AuthModule } from "./auth/auth.module";
 import { HealthModule } from "./health/health.module";
@@ -16,6 +19,9 @@ import { GraphQLModule } from "@nestjs/graphql";
   imports: [
     UserModule,
     VehicleModule,
+    RouteModule,
+    ManifestModule,
+    TicketModule,
     ACLModule,
     AuthModule,
     HealthModule,

@@ -11,7 +11,10 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsOptional } from "class-validator";
+import { IsString, IsOptional, ValidateNested } from "class-validator";
+import { ManifestCreateNestedManyWithoutUsersInput } from "./ManifestCreateNestedManyWithoutUsersInput";
+import { Type } from "class-transformer";
+import { TicketCreateNestedManyWithoutUsersInput } from "./TicketCreateNestedManyWithoutUsersInput";
 @InputType()
 class UserCreateInput {
   @ApiProperty({
@@ -37,6 +40,18 @@ class UserCreateInput {
   lastName?: string | null;
 
   @ApiProperty({
+    required: false,
+    type: () => ManifestCreateNestedManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => ManifestCreateNestedManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => ManifestCreateNestedManyWithoutUsersInput, {
+    nullable: true,
+  })
+  manifests?: ManifestCreateNestedManyWithoutUsersInput;
+
+  @ApiProperty({
     required: true,
     type: String,
   })
@@ -53,6 +68,18 @@ class UserCreateInput {
   })
   @Field(() => [String])
   roles!: Array<string>;
+
+  @ApiProperty({
+    required: false,
+    type: () => TicketCreateNestedManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => TicketCreateNestedManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => TicketCreateNestedManyWithoutUsersInput, {
+    nullable: true,
+  })
+  tickets?: TicketCreateNestedManyWithoutUsersInput;
 
   @ApiProperty({
     required: true,

@@ -14,12 +14,14 @@ const CREATE_INPUT = {
   chasisNumber: "exampleChasisNumber",
   createdAt: new Date(),
   id: "exampleId",
+  registrationNumber: "exampleRegistrationNumber",
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
   chasisNumber: "exampleChasisNumber",
   createdAt: new Date(),
   id: "exampleId",
+  registrationNumber: "exampleRegistrationNumber",
   updatedAt: new Date(),
 };
 const FIND_MANY_RESULT = [
@@ -27,6 +29,7 @@ const FIND_MANY_RESULT = [
     chasisNumber: "exampleChasisNumber",
     createdAt: new Date(),
     id: "exampleId",
+    registrationNumber: "exampleRegistrationNumber",
     updatedAt: new Date(),
   },
 ];
@@ -34,6 +37,7 @@ const FIND_ONE_RESULT = {
   chasisNumber: "exampleChasisNumber",
   createdAt: new Date(),
   id: "exampleId",
+  registrationNumber: "exampleRegistrationNumber",
   updatedAt: new Date(),
 };
 

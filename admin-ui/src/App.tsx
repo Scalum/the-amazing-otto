@@ -13,6 +13,18 @@ import { VehicleList } from "./vehicle/VehicleList";
 import { VehicleCreate } from "./vehicle/VehicleCreate";
 import { VehicleEdit } from "./vehicle/VehicleEdit";
 import { VehicleShow } from "./vehicle/VehicleShow";
+import { RouteList } from "./route/RouteList";
+import { RouteCreate } from "./route/RouteCreate";
+import { RouteEdit } from "./route/RouteEdit";
+import { RouteShow } from "./route/RouteShow";
+import { ManifestList } from "./manifest/ManifestList";
+import { ManifestCreate } from "./manifest/ManifestCreate";
+import { ManifestEdit } from "./manifest/ManifestEdit";
+import { ManifestShow } from "./manifest/ManifestShow";
+import { TicketList } from "./ticket/TicketList";
+import { TicketCreate } from "./ticket/TicketCreate";
+import { TicketEdit } from "./ticket/TicketEdit";
+import { TicketShow } from "./ticket/TicketShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -52,6 +64,27 @@ const App = (): React.ReactElement => {
           edit={VehicleEdit}
           create={VehicleCreate}
           show={VehicleShow}
+        />
+        <Resource
+          name="Route"
+          list={RouteList}
+          edit={RouteEdit}
+          create={RouteCreate}
+          show={RouteShow}
+        />
+        <Resource
+          name="Manifest"
+          list={ManifestList}
+          edit={ManifestEdit}
+          create={ManifestCreate}
+          show={ManifestShow}
+        />
+        <Resource
+          name="Ticket"
+          list={TicketList}
+          edit={TicketEdit}
+          create={TicketCreate}
+          show={TicketShow}
         />
       </Admin>
     </div>
