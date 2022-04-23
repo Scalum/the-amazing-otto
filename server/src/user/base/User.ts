@@ -66,6 +66,14 @@ class User {
 
   @ApiProperty({
     required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  phoneNumber!: string;
+
+  @ApiProperty({
+    required: true,
     type: [String],
   })
   @IsString({

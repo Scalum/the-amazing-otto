@@ -19,10 +19,10 @@ export const ManifestEdit = (props: EditProps): React.ReactElement => {
   return (
     <Edit {...props}>
       <SimpleForm>
-        <ReferenceInput source="user.id" reference="User" label="Driver ID">
+        <ReferenceInput source="user.id" reference="User" label="Driver">
           <SelectInput optionText={UserTitle} />
         </ReferenceInput>
-        <ReferenceInput source="route.id" reference="Route" label="Route ID">
+        <ReferenceInput source="route.id" reference="Route" label="Route">
           <SelectInput optionText={RouteTitle} />
         </ReferenceInput>
         <ReferenceArrayInput
@@ -33,11 +33,7 @@ export const ManifestEdit = (props: EditProps): React.ReactElement => {
         >
           <SelectArrayInput optionText={TicketTitle} />
         </ReferenceArrayInput>
-        <ReferenceInput
-          source="vehicle.id"
-          reference="Vehicle"
-          label="Vehicle ID"
-        >
+        <ReferenceInput source="vehicle.id" reference="Vehicle" label="Vehicle">
           <SelectInput optionText={VehicleTitle} />
         </ReferenceInput>
       </SimpleForm>

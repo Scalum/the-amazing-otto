@@ -6,6 +6,18 @@
     "attributes": "*"
   },
   {
+    "role": "customers",
+    "resource": "User",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "drivers",
+    "resource": "User",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "User",
     "action": "read:own",
@@ -18,6 +30,18 @@
     "attributes": "*"
   },
   {
+    "role": "customers",
+    "resource": "User",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "drivers",
+    "resource": "User",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "User",
     "action": "create:any",
@@ -30,6 +54,18 @@
     "attributes": "*"
   },
   {
+    "role": "customers",
+    "resource": "User",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "drivers",
+    "resource": "User",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "User",
     "action": "update:any",
@@ -37,6 +73,18 @@
   },
   {
     "role": "admin",
+    "resource": "User",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "customers",
+    "resource": "User",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "drivers",
     "resource": "User",
     "action": "delete:any",
     "attributes": "*"
@@ -54,6 +102,18 @@
     "attributes": "*"
   },
   {
+    "role": "customers",
+    "resource": "User",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "drivers",
+    "resource": "User",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "User",
     "action": "read:any",
@@ -66,6 +126,18 @@
     "attributes": "*"
   },
   {
+    "role": "customers",
+    "resource": "Vehicle",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "drivers",
+    "resource": "Vehicle",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "Vehicle",
     "action": "read:own",
@@ -78,6 +150,18 @@
     "attributes": "*"
   },
   {
+    "role": "customers",
+    "resource": "Vehicle",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "drivers",
+    "resource": "Vehicle",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "Vehicle",
     "action": "create:any",
@@ -90,6 +174,18 @@
     "attributes": "*"
   },
   {
+    "role": "customers",
+    "resource": "Vehicle",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "drivers",
+    "resource": "Vehicle",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "Vehicle",
     "action": "update:any",
@@ -97,6 +193,18 @@
   },
   {
     "role": "admin",
+    "resource": "Vehicle",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "customers",
+    "resource": "Vehicle",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "drivers",
     "resource": "Vehicle",
     "action": "delete:any",
     "attributes": "*"
@@ -114,6 +222,18 @@
     "attributes": "*"
   },
   {
+    "role": "customers",
+    "resource": "Vehicle",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "drivers",
+    "resource": "Vehicle",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "Vehicle",
     "action": "read:any",
@@ -126,6 +246,18 @@
     "attributes": "*"
   },
   {
+    "role": "customers",
+    "resource": "Route",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "drivers",
+    "resource": "Route",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "Route",
     "action": "read:own",
@@ -138,6 +270,18 @@
     "attributes": "*"
   },
   {
+    "role": "customers",
+    "resource": "Route",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "drivers",
+    "resource": "Route",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "Route",
     "action": "create:any",
@@ -150,6 +294,18 @@
     "attributes": "*"
   },
   {
+    "role": "customers",
+    "resource": "Route",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "drivers",
+    "resource": "Route",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "Route",
     "action": "update:any",
@@ -157,6 +313,18 @@
   },
   {
     "role": "admin",
+    "resource": "Route",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "customers",
+    "resource": "Route",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "drivers",
     "resource": "Route",
     "action": "delete:any",
     "attributes": "*"
@@ -174,6 +342,18 @@
     "attributes": "*"
   },
   {
+    "role": "customers",
+    "resource": "Route",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "drivers",
+    "resource": "Route",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "Route",
     "action": "read:any",
@@ -186,6 +366,18 @@
     "attributes": "*"
   },
   {
+    "role": "customers",
+    "resource": "Manifest",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "drivers",
+    "resource": "Manifest",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "Manifest",
     "action": "read:own",
@@ -198,6 +390,18 @@
     "attributes": "*"
   },
   {
+    "role": "customers",
+    "resource": "Manifest",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "drivers",
+    "resource": "Manifest",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "Manifest",
     "action": "create:any",
@@ -210,6 +414,18 @@
     "attributes": "*"
   },
   {
+    "role": "customers",
+    "resource": "Manifest",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "drivers",
+    "resource": "Manifest",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "Manifest",
     "action": "update:any",
@@ -217,6 +433,18 @@
   },
   {
     "role": "admin",
+    "resource": "Manifest",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "customers",
+    "resource": "Manifest",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "drivers",
     "resource": "Manifest",
     "action": "delete:any",
     "attributes": "*"
@@ -234,6 +462,18 @@
     "attributes": "*"
   },
   {
+    "role": "customers",
+    "resource": "Manifest",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "drivers",
+    "resource": "Manifest",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "Manifest",
     "action": "read:any",
@@ -246,6 +486,18 @@
     "attributes": "*"
   },
   {
+    "role": "customers",
+    "resource": "Ticket",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "drivers",
+    "resource": "Ticket",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "Ticket",
     "action": "read:own",
@@ -258,6 +510,18 @@
     "attributes": "*"
   },
   {
+    "role": "customers",
+    "resource": "Ticket",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "drivers",
+    "resource": "Ticket",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "Ticket",
     "action": "create:any",
@@ -270,6 +534,18 @@
     "attributes": "*"
   },
   {
+    "role": "customers",
+    "resource": "Ticket",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "drivers",
+    "resource": "Ticket",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "Ticket",
     "action": "update:any",
@@ -282,6 +558,18 @@
     "attributes": "*"
   },
   {
+    "role": "customers",
+    "resource": "Ticket",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "drivers",
+    "resource": "Ticket",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "Ticket",
     "action": "delete:any",
@@ -289,6 +577,18 @@
   },
   {
     "role": "admin",
+    "resource": "Ticket",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "customers",
+    "resource": "Ticket",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "drivers",
     "resource": "Ticket",
     "action": "read:any",
     "attributes": "*"

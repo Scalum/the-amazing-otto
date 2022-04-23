@@ -23,19 +23,15 @@ export const ManifestList = (props: ListProps): React.ReactElement => {
     >
       <Datagrid rowClick="show">
         <DateField source="createdAt" label="Created At" />
-        <ReferenceField label="Driver ID" source="user.id" reference="User">
+        <ReferenceField label="Driver" source="user.id" reference="User">
           <TextField source={USER_TITLE_FIELD} />
         </ReferenceField>
         <TextField label="ID" source="id" />
-        <ReferenceField label="Route ID" source="route.id" reference="Route">
+        <ReferenceField label="Route" source="route.id" reference="Route">
           <TextField source={ROUTE_TITLE_FIELD} />
         </ReferenceField>
         <DateField source="updatedAt" label="Updated At" />
-        <ReferenceField
-          label="Vehicle ID"
-          source="vehicle.id"
-          reference="Vehicle"
-        >
+        <ReferenceField label="Vehicle" source="vehicle.id" reference="Vehicle">
           <TextField source={VEHICLE_TITLE_FIELD} />
         </ReferenceField>
       </Datagrid>
