@@ -4,6 +4,6 @@ import { UserListRelationFilter } from "../user/UserListRelationFilter";
 
 export type TicketWhereInput = {
   id?: StringFilter;
-  manifestId?: ManifestListRelationFilter;
-  userId?: UserListRelationFilter;
+  manifest?: ManifestListRelationFilter;
+  user?: UserListRelationFilter;
 };

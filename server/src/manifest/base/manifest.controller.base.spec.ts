@@ -11,24 +11,32 @@ import { ManifestService } from "../manifest.service";
 const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
+  arrivalTime: new Date(),
   createdAt: new Date(),
+  departureTime: new Date(),
   id: "exampleId",
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
+  arrivalTime: new Date(),
   createdAt: new Date(),
+  departureTime: new Date(),
   id: "exampleId",
   updatedAt: new Date(),
 };
 const FIND_MANY_RESULT = [
   {
+    arrivalTime: new Date(),
     createdAt: new Date(),
+    departureTime: new Date(),
     id: "exampleId",
     updatedAt: new Date(),
   },
 ];
 const FIND_ONE_RESULT = {
+  arrivalTime: new Date(),
   createdAt: new Date(),
+  departureTime: new Date(),
   id: "exampleId",
   updatedAt: new Date(),
 };
@@ -96,7 +104,9 @@ describe("Manifest", () => {
       .expect(HttpStatus.CREATED)
       .expect({
         ...CREATE_RESULT,
+        arrivalTime: CREATE_RESULT.arrivalTime.toISOString(),
         createdAt: CREATE_RESULT.createdAt.toISOString(),
+        departureTime: CREATE_RESULT.departureTime.toISOString(),
         updatedAt: CREATE_RESULT.updatedAt.toISOString(),
       });
   });
@@ -108,7 +118,9 @@ describe("Manifest", () => {
       .expect([
         {
           ...FIND_MANY_RESULT[0],
+          arrivalTime: FIND_MANY_RESULT[0].arrivalTime.toISOString(),
           createdAt: FIND_MANY_RESULT[0].createdAt.toISOString(),
+          departureTime: FIND_MANY_RESULT[0].departureTime.toISOString(),
           updatedAt: FIND_MANY_RESULT[0].updatedAt.toISOString(),
         },
       ]);
@@ -131,7 +143,9 @@ describe("Manifest", () => {
       .expect(HttpStatus.OK)
       .expect({
         ...FIND_ONE_RESULT,
+        arrivalTime: FIND_ONE_RESULT.arrivalTime.toISOString(),
         createdAt: FIND_ONE_RESULT.createdAt.toISOString(),
+        departureTime: FIND_ONE_RESULT.departureTime.toISOString(),
         updatedAt: FIND_ONE_RESULT.updatedAt.toISOString(),
       });
   });

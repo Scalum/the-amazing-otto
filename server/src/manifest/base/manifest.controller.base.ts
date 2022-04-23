@@ -76,22 +76,24 @@ export class ManifestControllerBase {
       data: {
         ...data,
 
-        driverId: {
-          connect: data.driverId,
+        driver: {
+          connect: data.driver,
         },
 
-        routeId: {
-          connect: data.routeId,
+        route: {
+          connect: data.route,
         },
 
-        vehicleId: {
-          connect: data.vehicleId,
+        vehicle: {
+          connect: data.vehicle,
         },
       },
       select: {
+        arrivalTime: true,
         createdAt: true,
+        departureTime: true,
 
-        driverId: {
+        driver: {
           select: {
             id: true,
           },
@@ -99,7 +101,7 @@ export class ManifestControllerBase {
 
         id: true,
 
-        routeId: {
+        route: {
           select: {
             id: true,
           },
@@ -107,7 +109,7 @@ export class ManifestControllerBase {
 
         updatedAt: true,
 
-        vehicleId: {
+        vehicle: {
           select: {
             id: true,
           },
@@ -145,9 +147,11 @@ export class ManifestControllerBase {
     const results = await this.service.findMany({
       ...args,
       select: {
+        arrivalTime: true,
         createdAt: true,
+        departureTime: true,
 
-        driverId: {
+        driver: {
           select: {
             id: true,
           },
@@ -155,7 +159,7 @@ export class ManifestControllerBase {
 
         id: true,
 
-        routeId: {
+        route: {
           select: {
             id: true,
           },
@@ -163,7 +167,7 @@ export class ManifestControllerBase {
 
         updatedAt: true,
 
-        vehicleId: {
+        vehicle: {
           select: {
             id: true,
           },
@@ -200,9 +204,11 @@ export class ManifestControllerBase {
     const result = await this.service.findOne({
       where: params,
       select: {
+        arrivalTime: true,
         createdAt: true,
+        departureTime: true,
 
-        driverId: {
+        driver: {
           select: {
             id: true,
           },
@@ -210,7 +216,7 @@ export class ManifestControllerBase {
 
         id: true,
 
-        routeId: {
+        route: {
           select: {
             id: true,
           },
@@ -218,7 +224,7 @@ export class ManifestControllerBase {
 
         updatedAt: true,
 
-        vehicleId: {
+        vehicle: {
           select: {
             id: true,
           },
@@ -277,22 +283,24 @@ export class ManifestControllerBase {
         data: {
           ...data,
 
-          driverId: {
-            connect: data.driverId,
+          driver: {
+            connect: data.driver,
           },
 
-          routeId: {
-            connect: data.routeId,
+          route: {
+            connect: data.route,
           },
 
-          vehicleId: {
-            connect: data.vehicleId,
+          vehicle: {
+            connect: data.vehicle,
           },
         },
         select: {
+          arrivalTime: true,
           createdAt: true,
+          departureTime: true,
 
-          driverId: {
+          driver: {
             select: {
               id: true,
             },
@@ -300,7 +308,7 @@ export class ManifestControllerBase {
 
           id: true,
 
-          routeId: {
+          route: {
             select: {
               id: true,
             },
@@ -308,7 +316,7 @@ export class ManifestControllerBase {
 
           updatedAt: true,
 
-          vehicleId: {
+          vehicle: {
             select: {
               id: true,
             },
@@ -346,9 +354,11 @@ export class ManifestControllerBase {
       return await this.service.delete({
         where: params,
         select: {
+          arrivalTime: true,
           createdAt: true,
+          departureTime: true,
 
-          driverId: {
+          driver: {
             select: {
               id: true,
             },
@@ -356,7 +366,7 @@ export class ManifestControllerBase {
 
           id: true,
 
-          routeId: {
+          route: {
             select: {
               id: true,
             },
@@ -364,7 +374,7 @@ export class ManifestControllerBase {
 
           updatedAt: true,
 
-          vehicleId: {
+          vehicle: {
             select: {
               id: true,
             },
@@ -410,6 +420,7 @@ export class ManifestControllerBase {
       select: {
         createdAt: true,
         id: true,
+        seatNumber: true,
         updatedAt: true,
       },
     });

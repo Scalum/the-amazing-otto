@@ -139,16 +139,16 @@ export class ManifestResolverBase {
       data: {
         ...args.data,
 
-        driverId: {
-          connect: args.data.driverId,
+        driver: {
+          connect: args.data.driver,
         },
 
-        routeId: {
-          connect: args.data.routeId,
+        route: {
+          connect: args.data.route,
         },
 
-        vehicleId: {
-          connect: args.data.vehicleId,
+        vehicle: {
+          connect: args.data.vehicle,
         },
       },
     });
@@ -192,16 +192,16 @@ export class ManifestResolverBase {
         data: {
           ...args.data,
 
-          driverId: {
-            connect: args.data.driverId,
+          driver: {
+            connect: args.data.driver,
           },
 
-          routeId: {
-            connect: args.data.routeId,
+          route: {
+            connect: args.data.route,
           },
 
-          vehicleId: {
-            connect: args.data.vehicleId,
+          vehicle: {
+            connect: args.data.vehicle,
           },
         },
       });
@@ -269,7 +269,7 @@ export class ManifestResolverBase {
     action: "read",
     possession: "any",
   })
-  async driverId(
+  async driver(
     @graphql.Parent() parent: Manifest,
     @gqlUserRoles.UserRoles() userRoles: string[]
   ): Promise<User | null> {
@@ -279,7 +279,7 @@ export class ManifestResolverBase {
       possession: "any",
       resource: "User",
     });
-    const result = await this.service.getDriverId(parent.id);
+    const result = await this.service.getDriver(parent.id);
 
     if (!result) {
       return null;
@@ -293,7 +293,7 @@ export class ManifestResolverBase {
     action: "read",
     possession: "any",
   })
-  async routeId(
+  async route(
     @graphql.Parent() parent: Manifest,
     @gqlUserRoles.UserRoles() userRoles: string[]
   ): Promise<Route | null> {
@@ -303,7 +303,7 @@ export class ManifestResolverBase {
       possession: "any",
       resource: "Route",
     });
-    const result = await this.service.getRouteId(parent.id);
+    const result = await this.service.getRoute(parent.id);
 
     if (!result) {
       return null;
@@ -317,7 +317,7 @@ export class ManifestResolverBase {
     action: "read",
     possession: "any",
   })
-  async vehicleId(
+  async vehicle(
     @graphql.Parent() parent: Manifest,
     @gqlUserRoles.UserRoles() userRoles: string[]
   ): Promise<Vehicle | null> {
@@ -327,7 +327,7 @@ export class ManifestResolverBase {
       possession: "any",
       resource: "Vehicle",
     });
-    const result = await this.service.getVehicleId(parent.id);
+    const result = await this.service.getVehicle(parent.id);
 
     if (!result) {
       return null;

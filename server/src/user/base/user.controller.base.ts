@@ -308,9 +308,11 @@ export class UserControllerBase {
     const results = await this.service.findManifests(params.id, {
       ...query,
       select: {
+        arrivalTime: true,
         createdAt: true,
+        departureTime: true,
 
-        driverId: {
+        driver: {
           select: {
             id: true,
           },
@@ -318,7 +320,7 @@ export class UserControllerBase {
 
         id: true,
 
-        routeId: {
+        route: {
           select: {
             id: true,
           },
@@ -326,7 +328,7 @@ export class UserControllerBase {
 
         updatedAt: true,
 
-        vehicleId: {
+        vehicle: {
           select: {
             id: true,
           },
@@ -505,6 +507,7 @@ export class UserControllerBase {
       select: {
         createdAt: true,
         id: true,
+        seatNumber: true,
         updatedAt: true,
       },
     });

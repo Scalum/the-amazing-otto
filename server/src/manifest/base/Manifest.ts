@@ -11,7 +11,7 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, ValidateNested, IsString, IsOptional } from "class-validator";
+import { IsDate, IsOptional, ValidateNested, IsString } from "class-validator";
 import { Type } from "class-transformer";
 import { User } from "../../user/base/User";
 import { Route } from "../../route/base/Route";
@@ -19,6 +19,17 @@ import { Ticket } from "../../ticket/base/Ticket";
 import { Vehicle } from "../../vehicle/base/Vehicle";
 @ObjectType()
 class Manifest {
+  @ApiProperty({
+    required: false,
+  })
+  @IsDate()
+  @Type(() => Date)
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  arrivalTime!: Date | null;
+
   @ApiProperty({
     required: true,
   })
@@ -28,12 +39,23 @@ class Manifest {
   createdAt!: Date;
 
   @ApiProperty({
+    required: false,
+  })
+  @IsDate()
+  @Type(() => Date)
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  departureTime!: Date | null;
+
+  @ApiProperty({
     required: true,
     type: () => User,
   })
   @ValidateNested()
   @Type(() => User)
-  driverId?: User;
+  driver?: User;
 
   @ApiProperty({
     required: true,
@@ -49,7 +71,7 @@ class Manifest {
   })
   @ValidateNested()
   @Type(() => Route)
-  routeId?: Route;
+  route?: Route;
 
   @ApiProperty({
     required: false,
@@ -74,6 +96,6 @@ class Manifest {
   })
   @ValidateNested()
   @Type(() => Vehicle)
-  vehicleId?: Vehicle;
+  vehicle?: Vehicle;
 }
 export { Manifest };

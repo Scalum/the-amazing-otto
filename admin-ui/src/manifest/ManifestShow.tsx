@@ -3,9 +3,9 @@ import {
   Show,
   SimpleShowLayout,
   ShowProps,
+  TextField,
   DateField,
   ReferenceField,
-  TextField,
 } from "react-admin";
 import { USER_TITLE_FIELD } from "../user/UserTitle";
 import { ROUTE_TITLE_FIELD } from "../route/RouteTitle";
@@ -15,7 +15,9 @@ export const ManifestShow = (props: ShowProps): React.ReactElement => {
   return (
     <Show {...props}>
       <SimpleShowLayout>
+        <TextField label="Arrival Time" source="arrivalTime" />
         <DateField source="createdAt" label="Created At" />
+        <TextField label="Departure Time" source="departureTime" />
         <ReferenceField label="Driver" source="user.id" reference="User">
           <TextField source={USER_TITLE_FIELD} />
         </ReferenceField>

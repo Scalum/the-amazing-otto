@@ -14,6 +14,7 @@ export const TicketList = (props: ListProps): React.ReactElement => {
       <Datagrid rowClick="show">
         <DateField source="createdAt" label="Created At" />
         <TextField label="ID" source="id" />
+        <TextField label="Seat Number" source="seatNumber" />
         <DateField source="updatedAt" label="Updated At" />
       </Datagrid>
     </List>

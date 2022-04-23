@@ -11,7 +11,13 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsString, ValidateNested, IsOptional } from "class-validator";
+import {
+  IsDate,
+  IsString,
+  ValidateNested,
+  IsOptional,
+  IsInt,
+} from "class-validator";
 import { Type } from "class-transformer";
 import { Manifest } from "../../manifest/base/Manifest";
 import { User } from "../../user/base/User";
@@ -34,13 +40,21 @@ class Ticket {
   id!: string;
 
   @ApiProperty({
-    required: false,
+    required: true,
     type: () => [Manifest],
   })
   @ValidateNested()
   @Type(() => Manifest)
   @IsOptional()
-  manifestId?: Array<Manifest>;
+  manifest?: Array<Manifest>;
+
+  @ApiProperty({
+    required: true,
+    type: Number,
+  })
+  @IsInt()
+  @Field(() => Number)
+  seatNumber!: number;
 
   @ApiProperty({
     required: true,
@@ -51,12 +65,12 @@ class Ticket {
   updatedAt!: Date;
 
   @ApiProperty({
-    required: false,
+    required: true,
     type: () => [User],
   })
   @ValidateNested()
   @Type(() => User)
   @IsOptional()
-  userId?: Array<User>;
+  user?: Array<User>;
 }
 export { Ticket };
