@@ -261,14 +261,14 @@ export class TicketControllerBase {
     defaultAuthGuard.DefaultAuthGuard,
     nestAccessControl.ACGuard
   )
-  @common.Get("/:id/manifestId")
+  @common.Get("/:id/manifest")
   @nestAccessControl.UseRoles({
     resource: "Ticket",
     action: "read",
     possession: "any",
   })
   @ApiNestedQuery(ManifestFindManyArgs)
-  async findManyManifestId(
+  async findManyManifest(
     @common.Req() request: Request,
     @common.Param() params: TicketWhereUniqueInput,
     @nestAccessControl.UserRoles() userRoles: string[]
@@ -280,12 +280,14 @@ export class TicketControllerBase {
       possession: "any",
       resource: "Manifest",
     });
-    const results = await this.service.findManifestId(params.id, {
+    const results = await this.service.findManifest(params.id, {
       ...query,
       select: {
+        arrivalTime: true,
         createdAt: true,
+        departureTime: true,
 
-        driverId: {
+        driver: {
           select: {
             id: true,
           },
@@ -293,7 +295,7 @@ export class TicketControllerBase {
 
         id: true,
 
-        routeId: {
+        route: {
           select: {
             id: true,
           },
@@ -301,7 +303,7 @@ export class TicketControllerBase {
 
         updatedAt: true,
 
-        vehicleId: {
+        vehicle: {
           select: {
             id: true,
           },
@@ -321,19 +323,19 @@ export class TicketControllerBase {
     defaultAuthGuard.DefaultAuthGuard,
     nestAccessControl.ACGuard
   )
-  @common.Post("/:id/manifestId")
+  @common.Post("/:id/manifest")
   @nestAccessControl.UseRoles({
     resource: "Ticket",
     action: "update",
     possession: "any",
   })
-  async createManifestId(
+  async createManifest(
     @common.Param() params: TicketWhereUniqueInput,
     @common.Body() body: TicketWhereUniqueInput[],
     @nestAccessControl.UserRoles() userRoles: string[]
   ): Promise<void> {
     const data = {
-      manifestId: {
+      manifest: {
         connect: body,
       },
     };
@@ -366,19 +368,19 @@ export class TicketControllerBase {
     defaultAuthGuard.DefaultAuthGuard,
     nestAccessControl.ACGuard
   )
-  @common.Patch("/:id/manifestId")
+  @common.Patch("/:id/manifest")
   @nestAccessControl.UseRoles({
     resource: "Ticket",
     action: "update",
     possession: "any",
   })
-  async updateManifestId(
+  async updateManifest(
     @common.Param() params: TicketWhereUniqueInput,
     @common.Body() body: ManifestWhereUniqueInput[],
     @nestAccessControl.UserRoles() userRoles: string[]
   ): Promise<void> {
     const data = {
-      manifestId: {
+      manifest: {
         set: body,
       },
     };
@@ -411,19 +413,19 @@ export class TicketControllerBase {
     defaultAuthGuard.DefaultAuthGuard,
     nestAccessControl.ACGuard
   )
-  @common.Delete("/:id/manifestId")
+  @common.Delete("/:id/manifest")
   @nestAccessControl.UseRoles({
     resource: "Ticket",
     action: "update",
     possession: "any",
   })
-  async deleteManifestId(
+  async deleteManifest(
     @common.Param() params: TicketWhereUniqueInput,
     @common.Body() body: TicketWhereUniqueInput[],
     @nestAccessControl.UserRoles() userRoles: string[]
   ): Promise<void> {
     const data = {
-      manifestId: {
+      manifest: {
         disconnect: body,
       },
     };
@@ -456,14 +458,14 @@ export class TicketControllerBase {
     defaultAuthGuard.DefaultAuthGuard,
     nestAccessControl.ACGuard
   )
-  @common.Get("/:id/userId")
+  @common.Get("/:id/user")
   @nestAccessControl.UseRoles({
     resource: "Ticket",
     action: "read",
     possession: "any",
   })
   @ApiNestedQuery(UserFindManyArgs)
-  async findManyUserId(
+  async findManyUser(
     @common.Req() request: Request,
     @common.Param() params: TicketWhereUniqueInput,
     @nestAccessControl.UserRoles() userRoles: string[]
@@ -475,7 +477,7 @@ export class TicketControllerBase {
       possession: "any",
       resource: "User",
     });
-    const results = await this.service.findUserId(params.id, {
+    const results = await this.service.findUser(params.id, {
       ...query,
       select: {
         createdAt: true,
@@ -501,19 +503,19 @@ export class TicketControllerBase {
     defaultAuthGuard.DefaultAuthGuard,
     nestAccessControl.ACGuard
   )
-  @common.Post("/:id/userId")
+  @common.Post("/:id/user")
   @nestAccessControl.UseRoles({
     resource: "Ticket",
     action: "update",
     possession: "any",
   })
-  async createUserId(
+  async createUser(
     @common.Param() params: TicketWhereUniqueInput,
     @common.Body() body: TicketWhereUniqueInput[],
     @nestAccessControl.UserRoles() userRoles: string[]
   ): Promise<void> {
     const data = {
-      userId: {
+      user: {
         connect: body,
       },
     };
@@ -546,19 +548,19 @@ export class TicketControllerBase {
     defaultAuthGuard.DefaultAuthGuard,
     nestAccessControl.ACGuard
   )
-  @common.Patch("/:id/userId")
+  @common.Patch("/:id/user")
   @nestAccessControl.UseRoles({
     resource: "Ticket",
     action: "update",
     possession: "any",
   })
-  async updateUserId(
+  async updateUser(
     @common.Param() params: TicketWhereUniqueInput,
     @common.Body() body: UserWhereUniqueInput[],
     @nestAccessControl.UserRoles() userRoles: string[]
   ): Promise<void> {
     const data = {
-      userId: {
+      user: {
         set: body,
       },
     };
@@ -591,19 +593,19 @@ export class TicketControllerBase {
     defaultAuthGuard.DefaultAuthGuard,
     nestAccessControl.ACGuard
   )
-  @common.Delete("/:id/userId")
+  @common.Delete("/:id/user")
   @nestAccessControl.UseRoles({
     resource: "Ticket",
     action: "update",
     possession: "any",
   })
-  async deleteUserId(
+  async deleteUser(
     @common.Param() params: TicketWhereUniqueInput,
     @common.Body() body: TicketWhereUniqueInput[],
     @nestAccessControl.UserRoles() userRoles: string[]
   ): Promise<void> {
     const data = {
-      userId: {
+      user: {
         disconnect: body,
       },
     };

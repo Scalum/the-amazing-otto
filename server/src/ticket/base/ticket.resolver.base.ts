@@ -214,7 +214,7 @@ export class TicketResolverBase {
     action: "read",
     possession: "any",
   })
-  async manifestId(
+  async manifest(
     @graphql.Parent() parent: Ticket,
     @graphql.Args() args: ManifestFindManyArgs,
     @gqlUserRoles.UserRoles() userRoles: string[]
@@ -225,7 +225,7 @@ export class TicketResolverBase {
       possession: "any",
       resource: "Manifest",
     });
-    const results = await this.service.findManifestId(parent.id, args);
+    const results = await this.service.findManifest(parent.id, args);
 
     if (!results) {
       return [];
@@ -240,7 +240,7 @@ export class TicketResolverBase {
     action: "read",
     possession: "any",
   })
-  async userId(
+  async user(
     @graphql.Parent() parent: Ticket,
     @graphql.Args() args: UserFindManyArgs,
     @gqlUserRoles.UserRoles() userRoles: string[]
@@ -251,7 +251,7 @@ export class TicketResolverBase {
       possession: "any",
       resource: "User",
     });
-    const results = await this.service.findUserId(parent.id, args);
+    const results = await this.service.findUser(parent.id, args);
 
     if (!results) {
       return [];

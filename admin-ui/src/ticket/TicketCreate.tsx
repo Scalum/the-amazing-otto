@@ -14,7 +14,7 @@ export const TicketCreate = (props: CreateProps): React.ReactElement => {
     <Create {...props}>
       <SimpleForm>
         <ReferenceArrayInput
-          source="manifestId"
+          source="manifest"
           reference="Manifest"
           parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
           format={(value: any) => value && value.map((v: any) => v.id)}
@@ -22,7 +22,7 @@ export const TicketCreate = (props: CreateProps): React.ReactElement => {
           <SelectArrayInput optionText={ManifestTitle} />
         </ReferenceArrayInput>
         <ReferenceArrayInput
-          source="userId"
+          source="user"
           reference="User"
           parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
           format={(value: any) => value && value.map((v: any) => v.id)}

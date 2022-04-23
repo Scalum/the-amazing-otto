@@ -27,7 +27,7 @@ class TicketUpdateInput {
   @Field(() => ManifestUpdateManyWithoutTicketsInput, {
     nullable: true,
   })
-  manifestId?: ManifestUpdateManyWithoutTicketsInput;
+  manifest?: ManifestUpdateManyWithoutTicketsInput;
 
   @ApiProperty({
     required: false,
@@ -39,6 +39,6 @@ class TicketUpdateInput {
   @Field(() => UserUpdateManyWithoutTicketsInput, {
     nullable: true,
   })
-  userId?: UserUpdateManyWithoutTicketsInput;
+  user?: UserUpdateManyWithoutTicketsInput;
 }
 export { TicketUpdateInput };

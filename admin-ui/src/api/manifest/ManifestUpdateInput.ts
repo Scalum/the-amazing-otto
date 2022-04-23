@@ -4,8 +4,10 @@ import { TicketUpdateManyWithoutManifestsInput } from "./TicketUpdateManyWithout
 import { VehicleWhereUniqueInput } from "../vehicle/VehicleWhereUniqueInput";
 
 export type ManifestUpdateInput = {
-  driverId?: UserWhereUniqueInput;
-  routeId?: RouteWhereUniqueInput;
+  arrivalTime?: Date | null;
+  departureTime?: Date | null;
+  driver?: UserWhereUniqueInput;
+  route?: RouteWhereUniqueInput;
   ticket?: TicketUpdateManyWithoutManifestsInput;
-  vehicleId?: VehicleWhereUniqueInput;
+  vehicle?: VehicleWhereUniqueInput;
 };

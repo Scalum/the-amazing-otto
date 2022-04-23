@@ -40,7 +40,7 @@ class Ticket {
   @ValidateNested()
   @Type(() => Manifest)
   @IsOptional()
-  manifestId?: Array<Manifest>;
+  manifest?: Array<Manifest>;
 
   @ApiProperty({
     required: true,
@@ -57,6 +57,6 @@ class Ticket {
   @ValidateNested()
   @Type(() => User)
   @IsOptional()
-  userId?: Array<User>;
+  user?: Array<User>;
 }
 export { Ticket };

@@ -41,22 +41,24 @@ model Route {
 }
 
 model Manifest {
-  createdAt   DateTime @default(now())
-  driverId    User     @relation(fields: [driverIdId], references: [id])
-  driverIdId  String
-  id          String   @id @default(cuid())
-  routeId     Route    @relation(fields: [routeIdId], references: [id])
-  routeIdId   String
-  ticket      Ticket[]
-  updatedAt   DateTime @updatedAt
-  vehicleId   Vehicle  @relation(fields: [vehicleIdId], references: [id])
-  vehicleIdId String
+  arrivalTime   DateTime?
+  createdAt     DateTime  @default(now())
+  departureTime DateTime?
+  driver        User      @relation(fields: [driverId], references: [id])
+  driverId      String
+  id            String    @id @default(cuid())
+  route         Route     @relation(fields: [routeId], references: [id])
+  routeId       String
+  ticket        Ticket[]
+  updatedAt     DateTime  @updatedAt
+  vehicle       Vehicle   @relation(fields: [vehicleId], references: [id])
+  vehicleId     String
 }
 
 model Ticket {
-  createdAt  DateTime   @default(now())
-  id         String     @id @default(cuid())
-  manifestId Manifest[]
-  updatedAt  DateTime   @updatedAt
-  userId     User[]
+  createdAt DateTime   @default(now())
+  id        String     @id @default(cuid())
+  manifest  Manifest[]
+  updatedAt DateTime   @updatedAt
+  user      User[]
 }

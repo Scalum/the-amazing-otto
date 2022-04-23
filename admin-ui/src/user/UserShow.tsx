@@ -33,7 +33,9 @@ export const UserShow = (props: ShowProps): React.ReactElement => {
           label="Manifests"
         >
           <Datagrid rowClick="show">
+            <TextField label="Arrival Time" source="arrivalTime" />
             <DateField source="createdAt" label="Created At" />
+            <TextField label="Departure Time" source="departureTime" />
             <ReferenceField label="Driver" source="user.id" reference="User">
               <TextField source={USER_TITLE_FIELD} />
             </ReferenceField>

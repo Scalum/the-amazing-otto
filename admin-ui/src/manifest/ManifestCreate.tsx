@@ -4,6 +4,7 @@ import {
   Create,
   SimpleForm,
   CreateProps,
+  DateTimeInput,
   ReferenceInput,
   SelectInput,
   ReferenceArrayInput,
@@ -19,6 +20,8 @@ export const ManifestCreate = (props: CreateProps): React.ReactElement => {
   return (
     <Create {...props}>
       <SimpleForm>
+        <DateTimeInput label="Arrival Time" source="arrivalTime" />
+        <DateTimeInput label="Departure Time" source="departureTime" />
         <ReferenceInput source="user.id" reference="User" label="Driver">
           <SelectInput optionText={UserTitle} />
         </ReferenceInput>

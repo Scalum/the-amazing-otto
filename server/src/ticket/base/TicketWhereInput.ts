@@ -39,7 +39,7 @@ class TicketWhereInput {
   @Field(() => ManifestListRelationFilter, {
     nullable: true,
   })
-  manifestId?: ManifestListRelationFilter;
+  manifest?: ManifestListRelationFilter;
 
   @ApiProperty({
     required: false,
@@ -51,6 +51,6 @@ class TicketWhereInput {
   @Field(() => UserListRelationFilter, {
     nullable: true,
   })
-  userId?: UserListRelationFilter;
+  user?: UserListRelationFilter;
 }
 export { TicketWhereInput };

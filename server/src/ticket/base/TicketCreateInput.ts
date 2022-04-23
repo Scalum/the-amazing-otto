@@ -27,7 +27,7 @@ class TicketCreateInput {
   @Field(() => ManifestCreateNestedManyWithoutTicketsInput, {
     nullable: true,
   })
-  manifestId?: ManifestCreateNestedManyWithoutTicketsInput;
+  manifest?: ManifestCreateNestedManyWithoutTicketsInput;
 
   @ApiProperty({
     required: false,
@@ -39,6 +39,6 @@ class TicketCreateInput {
   @Field(() => UserCreateNestedManyWithoutTicketsInput, {
     nullable: true,
   })
-  userId?: UserCreateNestedManyWithoutTicketsInput;
+  user?: UserCreateNestedManyWithoutTicketsInput;
 }
 export { TicketCreateInput };
