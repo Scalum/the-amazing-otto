@@ -8,16 +8,17 @@ generator client {
 }
 
 model User {
-  createdAt DateTime   @default(now())
-  firstName String?
-  id        String     @id @default(cuid())
-  lastName  String?
-  manifests Manifest[]
-  password  String
-  roles     String[]
-  tickets   Ticket[]
-  updatedAt DateTime   @updatedAt
-  username  String     @unique
+  createdAt   DateTime   @default(now())
+  firstName   String?
+  id          String     @id @default(cuid())
+  lastName    String?
+  manifests   Manifest[]
+  password    String
+  phoneNumber String     @unique
+  roles       String[]
+  tickets     Ticket[]
+  updatedAt   DateTime   @updatedAt
+  username    String     @unique
 }
 
 model Vehicle {

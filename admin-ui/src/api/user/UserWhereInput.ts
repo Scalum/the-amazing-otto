@@ -8,6 +8,7 @@ export type UserWhereInput = {
   id?: StringFilter;
   lastName?: StringNullableFilter;
   manifests?: ManifestListRelationFilter;
+  phoneNumber?: StringFilter;
   tickets?: TicketListRelationFilter;
   username?: StringFilter;
 };

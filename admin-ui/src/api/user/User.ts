@@ -7,6 +7,7 @@ export type User = {
   id: string;
   lastName: string | null;
   manifests?: Array<Manifest>;
+  phoneNumber: string;
   roles: Array<string>;
   tickets?: Array<Ticket>;
   updatedAt: Date;

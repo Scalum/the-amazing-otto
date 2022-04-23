@@ -482,6 +482,7 @@ export class TicketControllerBase {
         firstName: true,
         id: true,
         lastName: true,
+        phoneNumber: true,
         roles: true,
         updatedAt: true,
         username: true,

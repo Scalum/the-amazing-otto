@@ -6,6 +6,7 @@ export type UserUpdateInput = {
   lastName?: string | null;
   manifests?: ManifestUpdateManyWithoutUsersInput;
   password?: string;
+  phoneNumber?: string;
   roles?: Array<string>;
   tickets?: TicketUpdateManyWithoutUsersInput;
   username?: string;

@@ -66,6 +66,17 @@ class UserWhereInput {
 
   @ApiProperty({
     required: false,
+    type: StringFilter,
+  })
+  @Type(() => StringFilter)
+  @IsOptional()
+  @Field(() => StringFilter, {
+    nullable: true,
+  })
+  phoneNumber?: StringFilter;
+
+  @ApiProperty({
+    required: false,
     type: () => TicketListRelationFilter,
   })
   @ValidateNested()

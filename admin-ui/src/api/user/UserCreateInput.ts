@@ -6,6 +6,7 @@ export type UserCreateInput = {
   lastName?: string | null;
   manifests?: ManifestCreateNestedManyWithoutUsersInput;
   password: string;
+  phoneNumber: string;
   roles: Array<string>;
   tickets?: TicketCreateNestedManyWithoutUsersInput;
   username: string;
