@@ -3,9 +3,9 @@ import {
   List,
   Datagrid,
   ListProps,
+  TextField,
   DateField,
   ReferenceField,
-  TextField,
 } from "react-admin";
 import Pagination from "../Components/Pagination";
 import { USER_TITLE_FIELD } from "../user/UserTitle";
@@ -22,7 +22,9 @@ export const ManifestList = (props: ListProps): React.ReactElement => {
       pagination={<Pagination />}
     >
       <Datagrid rowClick="show">
+        <TextField label="Arrival Time" source="arrivalTime" />
         <DateField source="createdAt" label="Created At" />
+        <TextField label="Departure Time" source="departureTime" />
         <ReferenceField label="Driver" source="user.id" reference="User">
           <TextField source={USER_TITLE_FIELD} />
         </ReferenceField>

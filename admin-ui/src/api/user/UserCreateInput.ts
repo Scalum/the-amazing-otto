@@ -1,7 +1,9 @@
+import { DriverDetailCreateNestedManyWithoutUsersInput } from "./DriverDetailCreateNestedManyWithoutUsersInput";
 import { ManifestCreateNestedManyWithoutUsersInput } from "./ManifestCreateNestedManyWithoutUsersInput";
 import { TicketCreateNestedManyWithoutUsersInput } from "./TicketCreateNestedManyWithoutUsersInput";
 
 export type UserCreateInput = {
+  driverDetails?: DriverDetailCreateNestedManyWithoutUsersInput;
   firstName?: string | null;
   lastName?: string | null;
   manifests?: ManifestCreateNestedManyWithoutUsersInput;

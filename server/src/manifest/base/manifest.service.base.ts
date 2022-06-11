@@ -58,27 +58,27 @@ export class ManifestServiceBase {
       .ticket(args);
   }
 
-  async getDriverId(parentId: string): Promise<User | null> {
+  async getDriver(parentId: string): Promise<User | null> {
     return this.prisma.manifest
       .findUnique({
         where: { id: parentId },
       })
-      .driverId();
+      .driver();
   }
 
-  async getRouteId(parentId: string): Promise<Route | null> {
+  async getRoute(parentId: string): Promise<Route | null> {
     return this.prisma.manifest
       .findUnique({
         where: { id: parentId },
       })
-      .routeId();
+      .route();
   }
 
-  async getVehicleId(parentId: string): Promise<Vehicle | null> {
+  async getVehicle(parentId: string): Promise<Vehicle | null> {
     return this.prisma.manifest
       .findUnique({
         where: { id: parentId },
       })
-      .vehicleId();
+      .vehicle();
   }
 }

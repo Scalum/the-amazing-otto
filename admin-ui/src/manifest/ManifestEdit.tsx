@@ -4,6 +4,7 @@ import {
   Edit,
   SimpleForm,
   EditProps,
+  DateTimeInput,
   ReferenceInput,
   SelectInput,
   ReferenceArrayInput,
@@ -19,6 +20,8 @@ export const ManifestEdit = (props: EditProps): React.ReactElement => {
   return (
     <Edit {...props}>
       <SimpleForm>
+        <DateTimeInput label="Arrival Time" source="arrivalTime" />
+        <DateTimeInput label="Departure Time" source="departureTime" />
         <ReferenceInput source="user.id" reference="User" label="Driver">
           <SelectInput optionText={UserTitle} />
         </ReferenceInput>

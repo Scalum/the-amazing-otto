@@ -11,15 +11,38 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
-import { ValidateNested, IsOptional } from "class-validator";
+import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
 import { Type } from "class-transformer";
+import { IsOptional, ValidateNested } from "class-validator";
+import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 import { StringFilter } from "../../util/StringFilter";
 import { RouteWhereUniqueInput } from "../../route/base/RouteWhereUniqueInput";
 import { TicketListRelationFilter } from "../../ticket/base/TicketListRelationFilter";
 import { VehicleWhereUniqueInput } from "../../vehicle/base/VehicleWhereUniqueInput";
 @InputType()
 class ManifestWhereInput {
+  @ApiProperty({
+    required: false,
+    type: DateTimeNullableFilter,
+  })
+  @Type(() => DateTimeNullableFilter)
+  @IsOptional()
+  @Field(() => DateTimeNullableFilter, {
+    nullable: true,
+  })
+  arrivalTime?: DateTimeNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: DateTimeNullableFilter,
+  })
+  @Type(() => DateTimeNullableFilter)
+  @IsOptional()
+  @Field(() => DateTimeNullableFilter, {
+    nullable: true,
+  })
+  departureTime?: DateTimeNullableFilter;
+
   @ApiProperty({
     required: false,
     type: () => UserWhereUniqueInput,
@@ -30,7 +53,7 @@ class ManifestWhereInput {
   @Field(() => UserWhereUniqueInput, {
     nullable: true,
   })
-  driverId?: UserWhereUniqueInput;
+  driver?: UserWhereUniqueInput;
 
   @ApiProperty({
     required: false,
@@ -53,7 +76,7 @@ class ManifestWhereInput {
   @Field(() => RouteWhereUniqueInput, {
     nullable: true,
   })
-  routeId?: RouteWhereUniqueInput;
+  route?: RouteWhereUniqueInput;
 
   @ApiProperty({
     required: false,
@@ -77,6 +100,6 @@ class ManifestWhereInput {
   @Field(() => VehicleWhereUniqueInput, {
     nullable: true,
   })
-  vehicleId?: VehicleWhereUniqueInput;
+  vehicle?: VehicleWhereUniqueInput;
 }
 export { ManifestWhereInput };

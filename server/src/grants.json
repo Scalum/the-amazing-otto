@@ -598,5 +598,125 @@
     "resource": "Ticket",
     "action": "read:any",
     "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "DriverDetail",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "customers",
+    "resource": "DriverDetail",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "drivers",
+    "resource": "DriverDetail",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "DriverDetail",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "DriverDetail",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "customers",
+    "resource": "DriverDetail",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "drivers",
+    "resource": "DriverDetail",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "DriverDetail",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "DriverDetail",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "customers",
+    "resource": "DriverDetail",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "drivers",
+    "resource": "DriverDetail",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "DriverDetail",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "DriverDetail",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "customers",
+    "resource": "DriverDetail",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "drivers",
+    "resource": "DriverDetail",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "DriverDetail",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "DriverDetail",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "customers",
+    "resource": "DriverDetail",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "drivers",
+    "resource": "DriverDetail",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "DriverDetail",
+    "action": "read:any",
+    "attributes": "*"
   }
 ]

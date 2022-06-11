@@ -12,7 +12,7 @@ https://docs.amplication.com/docs/how-to/custom-code
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { ManifestUpdateManyWithoutTicketsInput } from "./ManifestUpdateManyWithoutTicketsInput";
-import { ValidateNested, IsOptional } from "class-validator";
+import { ValidateNested, IsOptional, IsInt } from "class-validator";
 import { Type } from "class-transformer";
 import { UserUpdateManyWithoutTicketsInput } from "./UserUpdateManyWithoutTicketsInput";
 @InputType()
@@ -27,7 +27,18 @@ class TicketUpdateInput {
   @Field(() => ManifestUpdateManyWithoutTicketsInput, {
     nullable: true,
   })
-  manifestId?: ManifestUpdateManyWithoutTicketsInput;
+  manifest?: ManifestUpdateManyWithoutTicketsInput;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsInt()
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  seatNumber?: number;
 
   @ApiProperty({
     required: false,
@@ -39,6 +50,6 @@ class TicketUpdateInput {
   @Field(() => UserUpdateManyWithoutTicketsInput, {
     nullable: true,
   })
-  userId?: UserUpdateManyWithoutTicketsInput;
+  user?: UserUpdateManyWithoutTicketsInput;
 }
 export { TicketUpdateInput };

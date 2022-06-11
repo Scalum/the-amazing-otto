@@ -15,10 +15,10 @@ import * as apollo from "apollo-server-express";
 import * as nestAccessControl from "nest-access-control";
 import { GqlDefaultAuthGuard } from "../../auth/gqlDefaultAuth.guard";
 import * as gqlACGuard from "../../auth/gqlAC.guard";
-import * as gqlUserRoles from "../../auth/gqlUserRoles.decorator";
-import * as abacUtil from "../../auth/abac.util";
 import { isRecordNotFoundError } from "../../prisma.util";
 import { MetaQueryPayload } from "../../util/MetaQueryPayload";
+import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
 import { CreateVehicleArgs } from "./CreateVehicleArgs";
 import { UpdateVehicleArgs } from "./UpdateVehicleArgs";
 import { DeleteVehicleArgs } from "./DeleteVehicleArgs";
@@ -56,6 +56,7 @@ export class VehicleResolverBase {
     };
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => [Vehicle])
   @nestAccessControl.UseRoles({
     resource: "Vehicle",
@@ -63,19 +64,12 @@ export class VehicleResolverBase {
     possession: "any",
   })
   async vehicles(
-    @graphql.Args() args: VehicleFindManyArgs,
-    @gqlUserRoles.UserRoles() userRoles: string[]
+    @graphql.Args() args: VehicleFindManyArgs
   ): Promise<Vehicle[]> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "any",
-      resource: "Vehicle",
-    });
-    const results = await this.service.findMany(args);
-    return results.map((result) => permission.filter(result));
+    return this.service.findMany(args);
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => Vehicle, { nullable: true })
   @nestAccessControl.UseRoles({
     resource: "Vehicle",
@@ -83,22 +77,16 @@ export class VehicleResolverBase {
     possession: "own",
   })
   async vehicle(
-    @graphql.Args() args: VehicleFindUniqueArgs,
-    @gqlUserRoles.UserRoles() userRoles: string[]
+    @graphql.Args() args: VehicleFindUniqueArgs
   ): Promise<Vehicle | null> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "own",
-      resource: "Vehicle",
-    });
     const result = await this.service.findOne(args);
     if (result === null) {
       return null;
     }
-    return permission.filter(result);
+    return result;
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => Vehicle)
   @nestAccessControl.UseRoles({
     resource: "Vehicle",
@@ -106,37 +94,15 @@ export class VehicleResolverBase {
     possession: "any",
   })
   async createVehicle(
-    @graphql.Args() args: CreateVehicleArgs,
-    @gqlUserRoles.UserRoles() userRoles: string[]
+    @graphql.Args() args: CreateVehicleArgs
   ): Promise<Vehicle> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "create",
-      possession: "any",
-      resource: "Vehicle",
-    });
-    const invalidAttributes = abacUtil.getInvalidAttributes(
-      permission,
-      args.data
-    );
-    if (invalidAttributes.length) {
-      const properties = invalidAttributes
-        .map((attribute: string) => JSON.stringify(attribute))
-        .join(", ");
-      const roles = userRoles
-        .map((role: string) => JSON.stringify(role))
-        .join(",");
-      throw new apollo.ApolloError(
-        `providing the properties: ${properties} on ${"Vehicle"} creation is forbidden for roles: ${roles}`
-      );
-    }
-    // @ts-ignore
     return await this.service.create({
       ...args,
       data: args.data,
     });
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => Vehicle)
   @nestAccessControl.UseRoles({
     resource: "Vehicle",
@@ -144,32 +110,9 @@ export class VehicleResolverBase {
     possession: "any",
   })
   async updateVehicle(
-    @graphql.Args() args: UpdateVehicleArgs,
-    @gqlUserRoles.UserRoles() userRoles: string[]
+    @graphql.Args() args: UpdateVehicleArgs
   ): Promise<Vehicle | null> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "update",
-      possession: "any",
-      resource: "Vehicle",
-    });
-    const invalidAttributes = abacUtil.getInvalidAttributes(
-      permission,
-      args.data
-    );
-    if (invalidAttributes.length) {
-      const properties = invalidAttributes
-        .map((attribute: string) => JSON.stringify(attribute))
-        .join(", ");
-      const roles = userRoles
-        .map((role: string) => JSON.stringify(role))
-        .join(",");
-      throw new apollo.ApolloError(
-        `providing the properties: ${properties} on ${"Vehicle"} update is forbidden for roles: ${roles}`
-      );
-    }
     try {
-      // @ts-ignore
       return await this.service.update({
         ...args,
         data: args.data,
@@ -194,7 +137,6 @@ export class VehicleResolverBase {
     @graphql.Args() args: DeleteVehicleArgs
   ): Promise<Vehicle | null> {
     try {
-      // @ts-ignore
       return await this.service.delete(args);
     } catch (error) {
       if (isRecordNotFoundError(error)) {
@@ -206,29 +148,23 @@ export class VehicleResolverBase {
     }
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => [Manifest])
   @nestAccessControl.UseRoles({
-    resource: "Vehicle",
+    resource: "Manifest",
     action: "read",
     possession: "any",
   })
   async manifests(
     @graphql.Parent() parent: Vehicle,
-    @graphql.Args() args: ManifestFindManyArgs,
-    @gqlUserRoles.UserRoles() userRoles: string[]
+    @graphql.Args() args: ManifestFindManyArgs
   ): Promise<Manifest[]> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "any",
-      resource: "Manifest",
-    });
     const results = await this.service.findManifests(parent.id, args);
 
     if (!results) {
       return [];
     }
 
-    return results.map((result) => permission.filter(result));
+    return results;
   }
 }
