@@ -47,7 +47,7 @@ export class TicketServiceBase {
     return this.prisma.ticket.delete(args);
   }
 
-  async findManifestId(
+  async findManifest(
     parentId: string,
     args: Prisma.ManifestFindManyArgs
   ): Promise<Manifest[]> {
@@ -55,10 +55,10 @@ export class TicketServiceBase {
       .findUnique({
         where: { id: parentId },
       })
-      .manifestId(args);
+      .manifest(args);
   }
 
-  async findUserId(
+  async findUser(
     parentId: string,
     args: Prisma.UserFindManyArgs
   ): Promise<User[]> {
@@ -66,6 +66,6 @@ export class TicketServiceBase {
       .findUnique({
         where: { id: parentId },
       })
-      .userId(args);
+      .user(args);
   }
 }

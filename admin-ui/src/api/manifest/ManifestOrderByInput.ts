@@ -1,10 +1,12 @@
 import { SortOrder } from "../../util/SortOrder";
 
 export type ManifestOrderByInput = {
+  arrivalTime?: SortOrder;
   createdAt?: SortOrder;
-  driverIdId?: SortOrder;
+  departureTime?: SortOrder;
+  driverId?: SortOrder;
   id?: SortOrder;
-  routeIdId?: SortOrder;
+  routeId?: SortOrder;
   updatedAt?: SortOrder;
-  vehicleIdId?: SortOrder;
+  vehicleId?: SortOrder;
 };

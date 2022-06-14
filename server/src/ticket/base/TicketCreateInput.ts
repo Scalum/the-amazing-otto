@@ -12,13 +12,13 @@ https://docs.amplication.com/docs/how-to/custom-code
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { ManifestCreateNestedManyWithoutTicketsInput } from "./ManifestCreateNestedManyWithoutTicketsInput";
-import { ValidateNested, IsOptional } from "class-validator";
+import { ValidateNested, IsOptional, IsInt } from "class-validator";
 import { Type } from "class-transformer";
 import { UserCreateNestedManyWithoutTicketsInput } from "./UserCreateNestedManyWithoutTicketsInput";
 @InputType()
 class TicketCreateInput {
   @ApiProperty({
-    required: false,
+    required: true,
     type: () => ManifestCreateNestedManyWithoutTicketsInput,
   })
   @ValidateNested()
@@ -27,10 +27,18 @@ class TicketCreateInput {
   @Field(() => ManifestCreateNestedManyWithoutTicketsInput, {
     nullable: true,
   })
-  manifestId?: ManifestCreateNestedManyWithoutTicketsInput;
+  manifest?: ManifestCreateNestedManyWithoutTicketsInput;
 
   @ApiProperty({
-    required: false,
+    required: true,
+    type: Number,
+  })
+  @IsInt()
+  @Field(() => Number)
+  seatNumber!: number;
+
+  @ApiProperty({
+    required: true,
     type: () => UserCreateNestedManyWithoutTicketsInput,
   })
   @ValidateNested()
@@ -39,6 +47,6 @@ class TicketCreateInput {
   @Field(() => UserCreateNestedManyWithoutTicketsInput, {
     nullable: true,
   })
-  userId?: UserCreateNestedManyWithoutTicketsInput;
+  user?: UserCreateNestedManyWithoutTicketsInput;
 }
 export { TicketCreateInput };

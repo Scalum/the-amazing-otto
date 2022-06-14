@@ -4,7 +4,8 @@ import { User } from "../user/User";
 export type Ticket = {
   createdAt: Date;
   id: string;
-  manifestId?: Array<Manifest>;
+  manifest?: Array<Manifest>;
+  seatNumber: number;
   updatedAt: Date;
-  userId?: Array<User>;
+  user?: Array<User>;
 };

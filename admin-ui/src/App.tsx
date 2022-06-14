@@ -25,6 +25,10 @@ import { TicketList } from "./ticket/TicketList";
 import { TicketCreate } from "./ticket/TicketCreate";
 import { TicketEdit } from "./ticket/TicketEdit";
 import { TicketShow } from "./ticket/TicketShow";
+import { DriverDetailList } from "./driverDetail/DriverDetailList";
+import { DriverDetailCreate } from "./driverDetail/DriverDetailCreate";
+import { DriverDetailEdit } from "./driverDetail/DriverDetailEdit";
+import { DriverDetailShow } from "./driverDetail/DriverDetailShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -44,7 +48,7 @@ const App = (): React.ReactElement => {
   return (
     <div className="App">
       <Admin
-        title={"My app"}
+        title={"Legacy Luxury Shuttles"}
         dataProvider={dataProvider}
         authProvider={jwtAuthProvider}
         theme={theme}
@@ -85,6 +89,13 @@ const App = (): React.ReactElement => {
           edit={TicketEdit}
           create={TicketCreate}
           show={TicketShow}
+        />
+        <Resource
+          name="DriverDetail"
+          list={DriverDetailList}
+          edit={DriverDetailEdit}
+          create={DriverDetailCreate}
+          show={DriverDetailShow}
         />
       </Admin>
     </div>

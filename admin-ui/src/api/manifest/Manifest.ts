@@ -4,11 +4,13 @@ import { Ticket } from "../ticket/Ticket";
 import { Vehicle } from "../vehicle/Vehicle";
 
 export type Manifest = {
+  arrivalTime: Date | null;
   createdAt: Date;
-  driverId?: User;
+  departureTime: Date | null;
+  driver?: User;
   id: string;
-  routeId?: Route;
+  route?: Route;
   ticket?: Array<Ticket>;
   updatedAt: Date;
-  vehicleId?: Vehicle;
+  vehicle?: Vehicle;
 };

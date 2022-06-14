@@ -25,6 +25,15 @@ class ManifestOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
+  arrivalTime?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
   createdAt?: SortOrder;
 
   @ApiProperty({
@@ -34,7 +43,16 @@ class ManifestOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  driverIdId?: SortOrder;
+  departureTime?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
+  driverId?: SortOrder;
 
   @ApiProperty({
     required: false,
@@ -52,7 +70,7 @@ class ManifestOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  routeIdId?: SortOrder;
+  routeId?: SortOrder;
 
   @ApiProperty({
     required: false,
@@ -70,7 +88,7 @@ class ManifestOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  vehicleIdId?: SortOrder;
+  vehicleId?: SortOrder;
 }
 
 export { ManifestOrderByInput };

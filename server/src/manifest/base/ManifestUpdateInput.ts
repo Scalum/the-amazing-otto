@@ -11,14 +11,36 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
-import { ValidateNested, IsOptional } from "class-validator";
+import { IsDate, IsOptional, ValidateNested } from "class-validator";
 import { Type } from "class-transformer";
+import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 import { RouteWhereUniqueInput } from "../../route/base/RouteWhereUniqueInput";
 import { TicketUpdateManyWithoutManifestsInput } from "./TicketUpdateManyWithoutManifestsInput";
 import { VehicleWhereUniqueInput } from "../../vehicle/base/VehicleWhereUniqueInput";
 @InputType()
 class ManifestUpdateInput {
+  @ApiProperty({
+    required: false,
+  })
+  @IsDate()
+  @Type(() => Date)
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  arrivalTime?: Date | null;
+
+  @ApiProperty({
+    required: false,
+  })
+  @IsDate()
+  @Type(() => Date)
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  departureTime?: Date | null;
+
   @ApiProperty({
     required: false,
     type: () => UserWhereUniqueInput,
@@ -29,7 +51,7 @@ class ManifestUpdateInput {
   @Field(() => UserWhereUniqueInput, {
     nullable: true,
   })
-  driverId?: UserWhereUniqueInput;
+  driver?: UserWhereUniqueInput;
 
   @ApiProperty({
     required: false,
@@ -41,7 +63,7 @@ class ManifestUpdateInput {
   @Field(() => RouteWhereUniqueInput, {
     nullable: true,
   })
-  routeId?: RouteWhereUniqueInput;
+  route?: RouteWhereUniqueInput;
 
   @ApiProperty({
     required: false,
@@ -65,6 +87,6 @@ class ManifestUpdateInput {
   @Field(() => VehicleWhereUniqueInput, {
     nullable: true,
   })
-  vehicleId?: VehicleWhereUniqueInput;
+  vehicle?: VehicleWhereUniqueInput;
 }
 export { ManifestUpdateInput };

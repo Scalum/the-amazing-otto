@@ -4,8 +4,10 @@ import { TicketCreateNestedManyWithoutManifestsInput } from "./TicketCreateNeste
 import { VehicleWhereUniqueInput } from "../vehicle/VehicleWhereUniqueInput";
 
 export type ManifestCreateInput = {
-  driverId: UserWhereUniqueInput;
-  routeId: RouteWhereUniqueInput;
+  arrivalTime?: Date | null;
+  departureTime?: Date | null;
+  driver: UserWhereUniqueInput;
+  route: RouteWhereUniqueInput;
   ticket?: TicketCreateNestedManyWithoutManifestsInput;
-  vehicleId: VehicleWhereUniqueInput;
+  vehicle: VehicleWhereUniqueInput;
 };

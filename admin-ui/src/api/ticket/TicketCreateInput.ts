@@ -2,6 +2,7 @@ import { ManifestCreateNestedManyWithoutTicketsInput } from "./ManifestCreateNes
 import { UserCreateNestedManyWithoutTicketsInput } from "./UserCreateNestedManyWithoutTicketsInput";
 
 export type TicketCreateInput = {
-  manifestId?: ManifestCreateNestedManyWithoutTicketsInput;
-  userId?: UserCreateNestedManyWithoutTicketsInput;
+  manifest?: ManifestCreateNestedManyWithoutTicketsInput;
+  seatNumber: number;
+  user?: UserCreateNestedManyWithoutTicketsInput;
 };

@@ -13,6 +13,7 @@ export const TicketShow = (props: ShowProps): React.ReactElement => {
       <SimpleShowLayout>
         <DateField source="createdAt" label="Created At" />
         <TextField label="ID" source="id" />
+        <TextField label="Seat Number" source="seatNumber" />
         <DateField source="updatedAt" label="Updated At" />
       </SimpleShowLayout>
     </Show>

@@ -4,12 +4,13 @@ import {
   Create,
   SimpleForm,
   CreateProps,
-  TextInput,
   ReferenceArrayInput,
   SelectArrayInput,
+  TextInput,
   PasswordInput,
 } from "react-admin";
 
+import { DriverDetailTitle } from "../driverDetail/DriverDetailTitle";
 import { ManifestTitle } from "../manifest/ManifestTitle";
 import { TicketTitle } from "../ticket/TicketTitle";
 import { ROLES_OPTIONS } from "../user/RolesOptions";
@@ -18,6 +19,14 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
   return (
     <Create {...props}>
       <SimpleForm>
+        <ReferenceArrayInput
+          source="driverDetails"
+          reference="DriverDetail"
+          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
+          format={(value: any) => value && value.map((v: any) => v.id)}
+        >
+          <SelectArrayInput optionText={DriverDetailTitle} />
+        </ReferenceArrayInput>
         <TextInput label="First Name" source="firstName" />
         <TextInput label="Last Name" source="lastName" />
         <ReferenceArrayInput
