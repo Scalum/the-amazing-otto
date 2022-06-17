@@ -11,14 +11,27 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { DriverDetailListRelationFilter } from "../../driverDetail/base/DriverDetailListRelationFilter";
+import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
-import { IsOptional, ValidateNested } from "class-validator";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { ManifestListRelationFilter } from "../../manifest/base/ManifestListRelationFilter";
 import { TicketListRelationFilter } from "../../ticket/base/TicketListRelationFilter";
 @InputType()
 class UserWhereInput {
+  @ApiProperty({
+    required: false,
+    type: () => DriverDetailListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => DriverDetailListRelationFilter)
+  @IsOptional()
+  @Field(() => DriverDetailListRelationFilter, {
+    nullable: true,
+  })
+  driverDetails?: DriverDetailListRelationFilter;
+
   @ApiProperty({
     required: false,
     type: StringNullableFilter,

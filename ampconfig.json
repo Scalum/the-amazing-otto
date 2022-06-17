@@ -1,11 +1,11 @@
 {
-  "dataServiceGeneratorVersion": "0.12.4",
+  "dataServiceGeneratorVersion": "0.13.0",
   "appInfo": {
     "name": "Legacy Luxury Shuttles",
     "description": "",
-    "version": "xsaxbv6s",
+    "version": "ryalydjm",
     "id": "cl1kr97zq75092601s6oz95xx6j",
-    "url": "https://app.amplication.com/cl1kr97zq75092601s6oz95xx6j",
+    "url": "https://server.amplication.com/cl1kr97zq75092601s6oz95xx6j",
     "settings": {
       "dbHost": "localhost",
       "dbName": "",

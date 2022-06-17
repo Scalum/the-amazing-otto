@@ -15,10 +15,10 @@ import * as apollo from "apollo-server-express";
 import * as nestAccessControl from "nest-access-control";
 import { GqlDefaultAuthGuard } from "../../auth/gqlDefaultAuth.guard";
 import * as gqlACGuard from "../../auth/gqlAC.guard";
-import * as gqlUserRoles from "../../auth/gqlUserRoles.decorator";
-import * as abacUtil from "../../auth/abac.util";
 import { isRecordNotFoundError } from "../../prisma.util";
 import { MetaQueryPayload } from "../../util/MetaQueryPayload";
+import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
 import { CreateManifestArgs } from "./CreateManifestArgs";
 import { UpdateManifestArgs } from "./UpdateManifestArgs";
 import { DeleteManifestArgs } from "./DeleteManifestArgs";
@@ -59,6 +59,7 @@ export class ManifestResolverBase {
     };
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => [Manifest])
   @nestAccessControl.UseRoles({
     resource: "Manifest",
@@ -66,19 +67,12 @@ export class ManifestResolverBase {
     possession: "any",
   })
   async manifests(
-    @graphql.Args() args: ManifestFindManyArgs,
-    @gqlUserRoles.UserRoles() userRoles: string[]
+    @graphql.Args() args: ManifestFindManyArgs
   ): Promise<Manifest[]> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "any",
-      resource: "Manifest",
-    });
-    const results = await this.service.findMany(args);
-    return results.map((result) => permission.filter(result));
+    return this.service.findMany(args);
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.Query(() => Manifest, { nullable: true })
   @nestAccessControl.UseRoles({
     resource: "Manifest",
@@ -86,22 +80,16 @@ export class ManifestResolverBase {
     possession: "own",
   })
   async manifest(
-    @graphql.Args() args: ManifestFindUniqueArgs,
-    @gqlUserRoles.UserRoles() userRoles: string[]
+    @graphql.Args() args: ManifestFindUniqueArgs
   ): Promise<Manifest | null> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "own",
-      resource: "Manifest",
-    });
     const result = await this.service.findOne(args);
     if (result === null) {
       return null;
     }
-    return permission.filter(result);
+    return result;
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => Manifest)
   @nestAccessControl.UseRoles({
     resource: "Manifest",
@@ -109,31 +97,8 @@ export class ManifestResolverBase {
     possession: "any",
   })
   async createManifest(
-    @graphql.Args() args: CreateManifestArgs,
-    @gqlUserRoles.UserRoles() userRoles: string[]
+    @graphql.Args() args: CreateManifestArgs
   ): Promise<Manifest> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "create",
-      possession: "any",
-      resource: "Manifest",
-    });
-    const invalidAttributes = abacUtil.getInvalidAttributes(
-      permission,
-      args.data
-    );
-    if (invalidAttributes.length) {
-      const properties = invalidAttributes
-        .map((attribute: string) => JSON.stringify(attribute))
-        .join(", ");
-      const roles = userRoles
-        .map((role: string) => JSON.stringify(role))
-        .join(",");
-      throw new apollo.ApolloError(
-        `providing the properties: ${properties} on ${"Manifest"} creation is forbidden for roles: ${roles}`
-      );
-    }
-    // @ts-ignore
     return await this.service.create({
       ...args,
       data: {
@@ -154,6 +119,7 @@ export class ManifestResolverBase {
     });
   }
 
+  @common.UseInterceptors(AclValidateRequestInterceptor)
   @graphql.Mutation(() => Manifest)
   @nestAccessControl.UseRoles({
     resource: "Manifest",
@@ -161,32 +127,9 @@ export class ManifestResolverBase {
     possession: "any",
   })
   async updateManifest(
-    @graphql.Args() args: UpdateManifestArgs,
-    @gqlUserRoles.UserRoles() userRoles: string[]
+    @graphql.Args() args: UpdateManifestArgs
   ): Promise<Manifest | null> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "update",
-      possession: "any",
-      resource: "Manifest",
-    });
-    const invalidAttributes = abacUtil.getInvalidAttributes(
-      permission,
-      args.data
-    );
-    if (invalidAttributes.length) {
-      const properties = invalidAttributes
-        .map((attribute: string) => JSON.stringify(attribute))
-        .join(", ");
-      const roles = userRoles
-        .map((role: string) => JSON.stringify(role))
-        .join(",");
-      throw new apollo.ApolloError(
-        `providing the properties: ${properties} on ${"Manifest"} update is forbidden for roles: ${roles}`
-      );
-    }
     try {
-      // @ts-ignore
       return await this.service.update({
         ...args,
         data: {
@@ -225,7 +168,6 @@ export class ManifestResolverBase {
     @graphql.Args() args: DeleteManifestArgs
   ): Promise<Manifest | null> {
     try {
-      // @ts-ignore
       return await this.service.delete(args);
     } catch (error) {
       if (isRecordNotFoundError(error)) {
@@ -237,101 +179,71 @@ export class ManifestResolverBase {
     }
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => [Ticket])
   @nestAccessControl.UseRoles({
-    resource: "Manifest",
+    resource: "Ticket",
     action: "read",
     possession: "any",
   })
   async ticket(
     @graphql.Parent() parent: Manifest,
-    @graphql.Args() args: TicketFindManyArgs,
-    @gqlUserRoles.UserRoles() userRoles: string[]
+    @graphql.Args() args: TicketFindManyArgs
   ): Promise<Ticket[]> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "any",
-      resource: "Ticket",
-    });
     const results = await this.service.findTicket(parent.id, args);
 
     if (!results) {
       return [];
     }
 
-    return results.map((result) => permission.filter(result));
+    return results;
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => User, { nullable: true })
   @nestAccessControl.UseRoles({
-    resource: "Manifest",
+    resource: "User",
     action: "read",
     possession: "any",
   })
-  async driver(
-    @graphql.Parent() parent: Manifest,
-    @gqlUserRoles.UserRoles() userRoles: string[]
-  ): Promise<User | null> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "any",
-      resource: "User",
-    });
+  async driver(@graphql.Parent() parent: Manifest): Promise<User | null> {
     const result = await this.service.getDriver(parent.id);
 
     if (!result) {
       return null;
     }
-    return permission.filter(result);
+    return result;
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => Route, { nullable: true })
   @nestAccessControl.UseRoles({
-    resource: "Manifest",
+    resource: "Route",
     action: "read",
     possession: "any",
   })
-  async route(
-    @graphql.Parent() parent: Manifest,
-    @gqlUserRoles.UserRoles() userRoles: string[]
-  ): Promise<Route | null> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "any",
-      resource: "Route",
-    });
+  async route(@graphql.Parent() parent: Manifest): Promise<Route | null> {
     const result = await this.service.getRoute(parent.id);
 
     if (!result) {
       return null;
     }
-    return permission.filter(result);
+    return result;
   }
 
+  @common.UseInterceptors(AclFilterResponseInterceptor)
   @graphql.ResolveField(() => Vehicle, { nullable: true })
   @nestAccessControl.UseRoles({
-    resource: "Manifest",
+    resource: "Vehicle",
     action: "read",
     possession: "any",
   })
-  async vehicle(
-    @graphql.Parent() parent: Manifest,
-    @gqlUserRoles.UserRoles() userRoles: string[]
-  ): Promise<Vehicle | null> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "any",
-      resource: "Vehicle",
-    });
+  async vehicle(@graphql.Parent() parent: Manifest): Promise<Vehicle | null> {
     const result = await this.service.getVehicle(parent.id);
 
     if (!result) {
       return null;
     }
-    return permission.filter(result);
+    return result;
   }
 }
