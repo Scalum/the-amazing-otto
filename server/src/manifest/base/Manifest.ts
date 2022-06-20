@@ -11,7 +11,7 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsOptional, ValidateNested, IsString } from "class-validator";
+import { IsString, IsOptional, IsDate, ValidateNested } from "class-validator";
 import { Type } from "class-transformer";
 import { User } from "../../user/base/User";
 import { Route } from "../../route/base/Route";
@@ -21,14 +21,14 @@ import { Vehicle } from "../../vehicle/base/Vehicle";
 class Manifest {
   @ApiProperty({
     required: false,
+    type: String,
   })
-  @IsDate()
-  @Type(() => Date)
+  @IsString()
   @IsOptional()
-  @Field(() => Date, {
+  @Field(() => String, {
     nullable: true,
   })
-  arrivalTime!: Date | null;
+  arrivalTime!: string | null;
 
   @ApiProperty({
     required: true,
@@ -40,14 +40,14 @@ class Manifest {
 
   @ApiProperty({
     required: false,
+    type: String,
   })
-  @IsDate()
-  @Type(() => Date)
+  @IsString()
   @IsOptional()
-  @Field(() => Date, {
+  @Field(() => String, {
     nullable: true,
   })
-  departureTime!: Date | null;
+  departureTime!: string | null;
 
   @ApiProperty({
     required: true,

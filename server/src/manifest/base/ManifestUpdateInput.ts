@@ -11,9 +11,9 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsOptional, ValidateNested } from "class-validator";
-import { Type } from "class-transformer";
+import { IsString, IsOptional, ValidateNested } from "class-validator";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
+import { Type } from "class-transformer";
 import { RouteWhereUniqueInput } from "../../route/base/RouteWhereUniqueInput";
 import { TicketUpdateManyWithoutManifestsInput } from "./TicketUpdateManyWithoutManifestsInput";
 import { VehicleWhereUniqueInput } from "../../vehicle/base/VehicleWhereUniqueInput";
@@ -21,25 +21,25 @@ import { VehicleWhereUniqueInput } from "../../vehicle/base/VehicleWhereUniqueIn
 class ManifestUpdateInput {
   @ApiProperty({
     required: false,
+    type: String,
   })
-  @IsDate()
-  @Type(() => Date)
+  @IsString()
   @IsOptional()
-  @Field(() => Date, {
+  @Field(() => String, {
     nullable: true,
   })
-  arrivalTime?: Date | null;
+  arrivalTime?: string | null;
 
   @ApiProperty({
     required: false,
+    type: String,
   })
-  @IsDate()
-  @Type(() => Date)
+  @IsString()
   @IsOptional()
-  @Field(() => Date, {
+  @Field(() => String, {
     nullable: true,
   })
-  departureTime?: Date | null;
+  departureTime?: string | null;
 
   @ApiProperty({
     required: false,
