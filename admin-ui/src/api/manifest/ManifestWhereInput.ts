@@ -1,4 +1,4 @@
-import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 import { StringFilter } from "../../util/StringFilter";
 import { RouteWhereUniqueInput } from "../route/RouteWhereUniqueInput";
@@ -6,8 +6,8 @@ import { TicketListRelationFilter } from "../ticket/TicketListRelationFilter";
 import { VehicleWhereUniqueInput } from "../vehicle/VehicleWhereUniqueInput";
 
 export type ManifestWhereInput = {
-  arrivalTime?: DateTimeNullableFilter;
-  departureTime?: DateTimeNullableFilter;
+  arrivalTime?: StringNullableFilter;
+  departureTime?: StringNullableFilter;
   driver?: UserWhereUniqueInput;
   id?: StringFilter;
   route?: RouteWhereUniqueInput;

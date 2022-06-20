@@ -4,9 +4,9 @@ import { Ticket } from "../ticket/Ticket";
 import { Vehicle } from "../vehicle/Vehicle";
 
 export type Manifest = {
-  arrivalTime: Date | null;
+  arrivalTime: string | null;
   createdAt: Date;
-  departureTime: Date | null;
+  departureTime: string | null;
   driver?: User;
   id: string;
   route?: Route;
